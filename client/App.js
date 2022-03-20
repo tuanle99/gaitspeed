@@ -1,10 +1,12 @@
 import { View, StyleSheet } from "react-native";
+import { StatusBar } from "react-native";
 
 import Initialsetup from "./screens/Initialsetup.js";
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <StatusBar />
       <Initialsetup />
     </View>
   );

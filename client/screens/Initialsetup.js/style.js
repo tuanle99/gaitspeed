@@ -41,6 +41,20 @@ const styles = StyleSheet.create({
     fontSize: 20,
     lineHeight: 30,
   },
+  genderContainer: {
+    width: "40%",
+    alignItems: "center",
+    justifyContent: "center",
+    marginHorizontal: 10,
+    borderWidth: 2,
+    borderColor: "white",
+    borderRadius: 20,
+    flex: 1,
+  },
+  genderBtn: {
+    borderColor: "#0166ff",
+    backgroundColor: "rgba(1, 103, 255, 0.1)",
+  },
 });
 
 export default styles;
