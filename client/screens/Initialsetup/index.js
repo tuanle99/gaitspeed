@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { Text, View, Pressable, TextInput } from "react-native";
 import { RadioButton } from "react-native-paper";
+import { StatusBar } from "react-native";
 import * as Progress from "react-native-progress";
 import { Icon } from "react-native-elements";
 import styles from "./style";
 
-export default function Initialsetup() {
+export default function Initialsetup({ navigation }) {
   const [pages, setPages] = useState(0);
   const [name, setName] = useState("");
   const [age, setAge] = useState(0);
@@ -85,6 +86,7 @@ export default function Initialsetup() {
       case 0: //start
         return (
           <View style={styles.container}>
+            <StatusBar />
             <View style={styles.titleContainer}>
               <View style={styles.logo}>
                 <Text>Gait Speed Logo</Text>
@@ -92,41 +94,43 @@ export default function Initialsetup() {
               <Text style={[styles.textAlign, { fontSize: 15 }]}>
                 A short deascription of our product
               </Text>
+
+              <Pressable
+                style={[styles.nextButtonStyle, { top: 120 }]}
+                onPress={() => setPages(pages + 1)}
+              >
+                <Text style={[styles.textAlign, { fontSize: 25 }]}>
+                  Get Started
+                </Text>
+              </Pressable>
             </View>
-            <Pressable
-              style={[styles.nextButtonStyle, { marginBottom: 30 }]}
-              onPress={() => setPages(pages + 1)}
-            >
-              <Text style={[styles.textAlign, { fontSize: 25 }]}>
-                Get Started
-              </Text>
-            </Pressable>
           </View>
         );
       case 1: //initial info
         return (
           <View style={styles.container}>
-            <View style={styles.titleContainer}>
+            <StatusBar />
+            <View style={[styles.titleContainer]}>
               <Text style={[styles.textAlign, { fontSize: 22 }]}>
                 We will start with a quick survey to collect some basic
                 information from you. This will help us better understand your
                 health situation.
               </Text>
-              <Text
-                style={[styles.textAlign, { color: "#1662cf", marginTop: 50 }]}
-              >
+              <Text style={[styles.textAlign, { color: "#1662cf" }]}>
                 Your privacy is important to us
               </Text>
-              <Text style={[styles.textAlign]}>
+              <Text style={[styles.textAlign, { marginBottom: 100 }]}>
                 All information you enter is securely store and HIPAA complaint
               </Text>
+
+              {nextSkip("none")}
             </View>
-            {nextSkip("none")}
           </View>
         );
       case 2: //name
         return (
-          <View>
+          <View style={styles.container}>
+            <StatusBar />
             <View
               style={{
                 marginTop: 10,
@@ -135,35 +139,29 @@ export default function Initialsetup() {
               <Progress.Bar progress={1 / 6} width={null} />
               {prevPage()}
             </View>
-            <View style={[styles.titleContainer, { flex: 1 }]}>
-              <View style={{ height: "50%" }}>
+
+            <View style={styles.titleContainer}>
+              <View style={{ height: "30%", justifyContent: "center" }}>
                 <Text style={[styles.textAlign, { fontSize: 22 }]}>
                   1. How should we call you?
                 </Text>
               </View>
               <TextInput
-                style={[
-                  styles.textAlign,
-                  {
-                    fontSize: 22,
-                    color: "white",
-                    borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 250,
-                  },
-                ]}
+                style={[styles.textAlign, styles.textInputStyle]}
                 onChangeText={setName}
                 value={name}
                 placeholder="You name here"
                 placeholderTextColor="#9f9f9f"
               />
+
+              <View style={styles.container}>{nextSkip("name")}</View>
             </View>
-            <View style={styles.container}>{nextSkip("name")}</View>
           </View>
         );
       case 3: //age
         return (
-          <View>
+          <View style={styles.container}>
+            <StatusBar />
             <View
               style={{
                 marginTop: 10,
@@ -172,36 +170,29 @@ export default function Initialsetup() {
               <Progress.Bar progress={2 / 6} width={null} />
               {prevPage()}
             </View>
-            <View style={[styles.titleContainer, { flex: 1 }]}>
-              <View style={{ height: "50%" }}>
+            <View style={styles.titleContainer}>
+              <View style={{ height: "30%", justifyContent: "center" }}>
                 <Text style={[styles.textAlign, { fontSize: 22 }]}>
                   2. What is your age?
                 </Text>
               </View>
               <TextInput
-                style={[
-                  styles.textAlign,
-                  {
-                    fontSize: 22,
-                    color: "white",
-                    borderBottomWidth: 2,
-                    borderBottomColor: "white",
-                    width: 250,
-                  },
-                ]}
+                style={[styles.textAlign, styles.textInputStyle]}
                 onChangeText={setAge}
                 value={age}
                 placeholder="Your age here"
                 placeholderTextColor="#9f9f9f"
                 keyboardType="numeric"
               />
+
+              <View style={styles.container}>{nextSkip("age")}</View>
             </View>
-            <View style={styles.container}>{nextSkip("age")}</View>
           </View>
         );
       case 4: //gender
         return (
-          <View>
+          <View style={styles.container}>
+            <StatusBar />
             <View
               style={{
                 marginTop: 10,
@@ -223,11 +214,10 @@ export default function Initialsetup() {
                 </Text>
               </Pressable>
             </View>
-            <View style={[styles.titleContainer, { flex: 1 }]}>
+            <View style={[styles.titleContainer]}>
               <View
                 style={{
-                  height: "50%",
-                  textAlign: "center",
+                  height: "30%",
                   justifyContent: "center",
                 }}
               >
@@ -238,7 +228,6 @@ export default function Initialsetup() {
               <View
                 style={{
                   flexDirection: "row",
-                  flex: 1,
                 }}
               >
                 <Pressable
@@ -286,13 +275,15 @@ export default function Initialsetup() {
                   </Text>
                 </Pressable>
               </View>
+
+              <View style={styles.container}>{nextSkip("gender")}</View>
             </View>
-            <View style={styles.container}>{nextSkip("gender")}</View>
           </View>
         );
       case 5: //ethnicity
         return (
-          <View>
+          <View style={styles.container}>
+            <StatusBar />
             <View
               style={{
                 marginTop: 10,
@@ -301,14 +292,19 @@ export default function Initialsetup() {
               <Progress.Bar progress={4 / 6} width={null} />
               {prevPage()}
             </View>
-            <View style={[styles.titleContainer, { flex: 1 }]}>
-              <View style={{ height: "50%", justifyContent: "center" }}>
+            <View style={[styles.titleContainer]}>
+              <View
+                style={{
+                  height: "30%",
+                  justifyContent: "center",
+                }}
+              >
                 <Text style={[styles.textAlign, { fontSize: 22 }]}>
                   4. What is your ethnicity?
                 </Text>
               </View>
 
-              <View style={{ justifyContent: "flex-start" }}>
+              <View style={{ justifyContent: "flex-start", marginBottom: 30 }}>
                 <View
                   style={{
                     flexDirection: "row",
@@ -388,13 +384,15 @@ export default function Initialsetup() {
                   </Text>
                 </View>
               </View>
+
+              <View style={styles.container}>{nextSkip("ethnicity")}</View>
             </View>
-            <View style={styles.container}>{nextSkip("ethnicity")}</View>
           </View>
         );
       case 6: //weight and height
         return (
-          <View>
+          <View style={styles.container}>
+            <StatusBar />
             <View
               style={{
                 marginTop: 10,
@@ -403,14 +401,13 @@ export default function Initialsetup() {
               <Progress.Bar progress={5 / 6} width={null} />
               {prevPage()}
             </View>
-            <View style={[styles.titleContainer, { flex: 1 }]}>
-              <View style={{ height: "50%", justifyContent: "center" }}>
+            <View style={[styles.titleContainer]}>
+              <View style={{ height: "30%", justifyContent: "center" }}>
                 <Text style={[styles.textAlign, { fontSize: 22 }]}>
                   5. What is your weight and height?
                 </Text>
               </View>
-            </View>
-            <View>
+
               <TextInput
                 style={[
                   styles.textAlign,
@@ -438,6 +435,7 @@ export default function Initialsetup() {
                     borderBottomColor: "white",
                     width: 250,
                     marginTop: 20,
+                    marginBottom: 68,
                   },
                 ]}
                 onChangeText={setHeight}
@@ -446,13 +444,15 @@ export default function Initialsetup() {
                 placeholderTextColor="#9f9f9f"
                 keyboardType="numeric"
               />
+
+              <View style={styles.container}>{nextSkip("weight")}</View>
             </View>
-            <View style={styles.container}>{nextSkip("weight")}</View>
           </View>
         );
       case 7: //condition
         return (
-          <View>
+          <View style={styles.container}>
+            <StatusBar />
             <View
               style={{
                 marginTop: 10,
@@ -461,10 +461,10 @@ export default function Initialsetup() {
               <Progress.Bar progress={6 / 6} width={null} />
               {prevPage()}
             </View>
-            <View style={[styles.titleContainer, { flex: 1 }]}>
+            <View style={[styles.titleContainer]}>
               <View
                 style={{
-                  height: "60%",
+                  height: "30%",
                   justifyContent: "center",
                   marginBottom: 20,
                 }}
@@ -494,25 +494,28 @@ export default function Initialsetup() {
                 onFocus={() => setHide(true)}
                 onBlur={() => setHide(false)}
               />
-              {!hide && (
-                <Icon
-                  type="font-awesome"
-                  name="plus-circle"
-                  color="white"
-                  size={100}
-                  onPress={() => {
-                    setCondition([...condition, add]);
-                    setAdd("");
-                  }}
-                />
-              )}
+              <View style={{ marginBottom: 30 }}>
+                {!hide && (
+                  <Icon
+                    type="font-awesome"
+                    name="plus-circle"
+                    color="white"
+                    size={100}
+                    onPress={() => {
+                      setCondition([...condition, add]);
+                      setAdd("");
+                    }}
+                  />
+                )}
+              </View>
+              <View style={styles.container}>{nextSkip("condition")}</View>
             </View>
-            <View style={styles.container}>{nextSkip("condition")}</View>
           </View>
         );
       default:
         return (
-          <View>
+          <View style={styles.container}>
+            <StatusBar />
             <View
               style={{
                 marginTop: 10,
@@ -521,6 +524,20 @@ export default function Initialsetup() {
               {prevPage()}
             </View>
             <View style={[styles.titleContainer, { flex: 1 }]}>
+              <Pressable onPress={() => navigation.navigate("Home")}>
+                <Text
+                  style={[
+                    styles.textAlign,
+                    {
+                      fontSize: 25,
+                      marginTop: 10,
+                      textAlign: "left",
+                    },
+                  ]}
+                >
+                  (Go To Home)
+                </Text>
+              </Pressable>
               <View style={{ height: "50%" }}>
                 <Text style={[styles.textAlign, { fontSize: 22 }]}>
                   Name: {name}
