@@ -6,7 +6,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 export default function Record() {
   const [modalVisible, setModalVisible] = useState(false);
   return (
-    <View>
+    <View style={{ backgroundColor: "black" }}>
       <Pressable
         onPress={() => {
           setModalVisible(true);
@@ -16,7 +16,7 @@ export default function Record() {
         <Ionicons
           name="md-add-circle"
           size={70}
-          color="blue"
+          color="#0365fb"
           style={{ marginBottom: -20 }}
         />
       </Pressable>

@@ -524,7 +524,7 @@ export default function Initialsetup({ navigation }) {
               {prevPage()}
             </View>
             <View style={[styles.titleContainer, { flex: 1 }]}>
-              <Pressable onPress={() => navigation.navigate("Home")}>
+              <Pressable onPress={() => navigation.navigate("Main")}>
                 <Text
                   style={[
                     styles.textAlign,
