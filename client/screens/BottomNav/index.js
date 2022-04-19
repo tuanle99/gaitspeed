@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, StatusBar } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
@@ -66,7 +67,7 @@ export default function BottomNav() {
           }}
         />
         <Tab.Screen
-          name="Me"
+          name="Profile"
           component={Profile}
           options={{
             tabBarIcon: ({ color, size }) => (

@@ -3,7 +3,7 @@ import { Text, View, Dimensions, Pressable } from "react-native";
 import { LineChart } from "react-native-chart-kit";
 
 import { Svg, Text as TextSVG, Rect } from "react-native-svg";
-
+import dataset from "../../data/data.json";
 import styles from "./style";
 
 export default function Home() {
@@ -62,10 +62,18 @@ export default function Home() {
   };
 
   const data = {
-    labels: currentDate(),
+    labels: dataset.map(function (a) {
+      if (a.date.substring(3, 4) === "/") {
+        return a.date.substring(0, 3);
+      } else {
+        return a.date.substring(0, 4);
+      }
+    }),
     datasets: [
       {
-        data: [1, 2, 3, 4, 5, 2, 5],
+        data: dataset.map(function (a) {
+          return a.gaitspeed.toFixed(3);
+        }),
       },
     ],
   };
@@ -81,15 +89,25 @@ export default function Home() {
   const config = {
     backgroundGradientFrom: "#2c0012",
     backgroundGradientTo: "#c31064",
-    decimalPlaces: 0,
+    decimalPlaces: 3,
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    propsForDots: {
+      r: "4",
+      strokeWidth: "1",
+      stroke: "black",
+    },
   };
 
   const config2 = {
     backgroundGradientFrom: "#0b4732",
     backgroundGradientTo: "#14a772",
-    decimalPlaces: 0,
+    decimalPlaces: 3,
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
+    propsForDots: {
+      r: "4",
+      strokeWidth: "1",
+      stroke: "black",
+    },
   };
 
   return (
